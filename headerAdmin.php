@@ -176,6 +176,7 @@ session_start();
             <ul class="nav-menu">
                 <li><a href="adminAdd.php">Tambah Produk</a></li>
                 <li><a href="adminEdit.php">Lihat Produk</a></li>
+                <li><a href="adminConfirm.php"> Pembayaran</a></li>
             </ul>
             <div class="nav-acc">
                 <a id="dropdown-trigger">

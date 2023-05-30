@@ -1,6 +1,10 @@
 <?php
 session_start();
 session_unset();
+
+if (isset($_POST['msg'])) {
+    echo "<script>window.alert(" . $_POST['msg'] . ")</script>";
+}
 ?>
 
 <!DOCTYPE html>
@@ -20,9 +24,9 @@ session_unset();
         <h1>Login</h1>
         <form class="form1" method="POST" action="login_action.php">
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" placeholder="Enter username">
+            <input type="text" id="username" name="username" placeholder="Username client/admin">
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter password">
+            <input type="password" id="password" name="password" placeholder="Password">
             <input type="submit" value="Login" onclick="login();">
         </form>
         <form class="form2" action="register.php" method="get">

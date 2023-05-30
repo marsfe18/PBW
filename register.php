@@ -13,7 +13,7 @@
 <body>
     <main>
         <h1>Register</h1>
-        <form name="registerform" onsubmit="return validateForm();" action="action_page.php" method="POST">
+        <form name="registerform" onsubmit="return validateForm();" action="register_action.php" method="POST">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" placeholder="Enter username" required>
             <label for="email">Email:</label>
@@ -28,9 +28,9 @@
             </div>
             <label>Jenis Kelamin:</label>
             <div class="formjk">
-                <input type="radio" id="man" name="jk" value="MAN">
+                <input type="radio" id="man" name="jk" value="m">
                 <label for="man">Laki-laki</label>
-                <input type="radio" id="woman" name="jk" value="WOMAN">
+                <input type="radio" id="woman" name="jk" value="f">
                 <label for="woman">Perempuan</label>
             </div>
             <div class="term">

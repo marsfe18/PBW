@@ -22,7 +22,7 @@ try {
 
     // Menampilkan pesan sukses
     $msg = "Registration successful. Welcome, $username!";
-    header("location: index.php?msg=" . $username);
+    header("location: index.php?msg=" . $msg);
 } catch (PDOException $e) {
     // Menampilkan pesan kesalahan jika terjadi error
     echo "Error: " . $e->getMessage();

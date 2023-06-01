@@ -28,8 +28,8 @@ if ($stmt->rowCount() == 1) {
         $_SESSION['username'] = $_POST['username'];
         header('Location: adminEdit.php');
     } else {
-        $_SESSION['login_error'] = "Username atau password salah.";
-        header('location: index.php');
+        $msg = 'Password/Username Salah';
+        header('location: index.php?msg=' . $msg);
         exit();
     }
 }

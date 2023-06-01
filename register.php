@@ -41,7 +41,7 @@
         </form>
         <a href="index.php" style="margin-top: 10px;">Sudah punya akun? masuk</a>
     </main>
-    '<script>
+    <script>
         function validateForm() {
             var password = document.forms["registerform"]["password"].value;
             var password_confirm = document.forms["registerform"]["password_confirm"].value;
@@ -50,7 +50,7 @@
                 return false;
             }
         }
-    </script>'
+    </script>
 </body>
 
 </html>

@@ -1,10 +1,6 @@
 <?php
 session_start();
 session_unset();
-
-if (isset($_POST['msg'])) {
-    echo "<script>window.alert(" . $_POST['msg'] . ")</script>";
-}
 ?>
 
 <!DOCTYPE html>
@@ -33,12 +29,12 @@ if (isset($_POST['msg'])) {
             <input type="submit" value="Don't have account? Register">
         </form>
     </main>
-    <?php if (isset($_SESSION['login_error'])) : ?>
+    <?php if (isset($_GET['msg'])) : ?>
         <script>
-            alert("<?php echo $_SESSION['login_error']; ?>");
+            window.alert("<?php echo $_GET['msg']; ?>")
         </script>
-    <?php session_unset();
-    endif; ?>
+    <?php endif; ?>
+
 </body>
 
 </html>

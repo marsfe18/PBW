@@ -44,7 +44,7 @@ session_start();
                 </div>
 
                 <div class="produk" onclick="show(3)">
-                    <h3>Headphone</h3>
+                    <h3>Headset Gimang</h3>
                     <img src="assets/produk3.png" alt="produk 3">
                     <p>Suara jedag jedug makin mantap.</p>
                 </div>

@@ -1,72 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap');
-
-* {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  line-height: 1.5;
-  box-sizing: border-box;
-}
-
-/* navigasi start */
-.nav-logo a {
-  font-family: 'Tilt Warp', cursive;
-  text-align: right;
-  color: rgb(0, 0, 0);
-  font-weight: bold;
-  font-size: 20px;
-}
-
-ul {
-  list-style: none;
-}
-
-li {
-  display: inline;
-}
-
-a {
-  color: rgb(0, 0, 0);
-  text-decoration: none;
-}
-
-.nav-menu li {
-  margin: 0;
-  padding: 10px 10px;
-  transition: all 0.3s ease-in-out;
-}
-
-.nav-menu a {
-  color: #313131;
-  font-weight: bold;
-  transition: all 0.3s ease-in-out;
-}
-
-.nav-menu a:hover,
-.nav-menu a:active {
-  color: #00a7ff;
-}
-
-nav img {
-  height: 25px;
-  margin-bottom: -5px;
-}
-
-nav {
-  display: flex;
-  justify-content: space-between;
-  /* agar logo sebelah kiri nav tengah dan search kanan */
-  align-items: center;
-  padding: 15px 15px 20px;
-}
-
-/* navigasi selesai */
-
 main {
   display: flex;
   flex-direction: column;
   /* border: 1px solid; */
-  margin: 20px;
+  /* margin: 20px; */
 }
 
 main li {
@@ -81,56 +17,58 @@ main li {
   padding: 20px 20px;
   border-bottom: 10px solid rgb(173, 173, 173);
   border-radius: 7px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
-table {
+/* Styling untuk tabel utama */
+#orderTable {
   width: 100%;
   border-collapse: collapse;
-  border-spacing: 0;
-  background-color: #fff;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-  font-size: 16px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+#orderTable th,
+#orderTable td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+#orderTable th {
+  background-color: #f2f2f2;
   color: #333;
 }
 
-thead tr {
-  background-color: #f8f8f8;
+.order-item-content {
+  background-color: #fff;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-thead th {
-  padding: 12px;
-  font-weight: bold;
-  text-align: left;
+
+
+#orderItemTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
 }
 
-tbody tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-tbody td {
-  padding: 12px;
-  text-align: left;
-  vertical-align: middle;
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-}
-
-button {
+#orderItemTable th,
+#orderItemTable td {
   padding: 10px;
-  background-color: #f8f8f8;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-  font-weight: bold;
-  border: 1px solid #ccc;
-  border-radius: 7px;
-  margin-top: 10px;
-  width: 150px;
-  cursor: pointer;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
 }
 
-button:hover {
-  background-color: #414141;
-  color: #f2f2f2;
+#orderItemTable th {
+  background-color: #f2f2f2;
+  color: #333;
 }
 
-@media only screen and (max-width: 750px) {}
+#orderItemTable tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}

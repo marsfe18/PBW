@@ -1,116 +1,93 @@
 let products = {
-  data: [
-    {
-      nama: "Mouse G",
-      category: "Mouse",
-      price: "30",
-      image: "assets/produk1.webp",
-      desc: "Tambahan terbaru pada jajaran produk G yang legendaris. Dilengkapi switch optik-mechanical hibrida LIGHTFORCE kami yang pertama dan protokol LIGHTSPEED",
-    },
-    {
-      nama: "Keyboard G",
-      category: "Keyboard",
-      price: "49",
-      image: "assets/produk2.png",
-      desc: "Tactile mechanical switch standar gaming memberikan feedback yang jelas melalui momen aktuasi",
-    },
-    {
-      nama: "Headset G",
-      category: "Headset",
-      price: "99",
-      image: "assets/produk3.png",
-      desc: "Mulai dari desain hingga produksi, sampai pengiriman, kami sebisa mungkin menggunakan plastik daur ulang, menciptakan kemasan yang ramah lingkungan,",
-    },
-    {
-      nama: "Mouse M",
-      category: "Mouse",
-      price: "29",
-      image: "assets/produk4.png",
-      desc: "Kurang dari 63 gram. Low-latency LIGHTSPEED wireless terbaik. Presisi tingkat tinggi dengan sensor HERO 25K.",
-    },
-    {
-      nama: "Keyboard M",
-      category: "Keyboard",
-      price: "129",
-      image: "assets/produk5.png",
-      desc: "Dilengkapi dengan pencahayaan RGB memukau dan switch mechanical GX pilihanmu. Hadir dalam corak White Mist. Aksesori bercorak warna dijual terpisah.",
-    },
-    {
-      nama: "Headset M",
-      category: "Headset",
-      price: "89",
-      image: "assets/produk6.webp",
-      desc: "memaksimalkan kenyamanan dan kecocokan untuk semua gamer termasuk gamer dengan ukuran kepala lebih kecil.",
-    },
-    {
-      nama: "Mousepad X",
-      category: "Mousepad",
-      price: "189",
-      image: "assets/produk7.webp",
-      desc: "Mouse G adalah tambahan",
-    },
-    {
-      nama: "Mouse X",
-      category: "Mouse",
-      price: "49",
-      image: "assets/produk8.webp",
-      desc: " Dengan teknologi LIGHTSYNC, sensor kelas gaming, dan desain 6 tombol klasik, kamu akan menceriakan game-mu dan mejamu",
-    },
-  ],
+  data: []
 };
 
-localStorage.setItem('produk', JSON.stringify(products.data));
+// Menggunakan AJAX untuk mengambil data dari PHP
+let xhr = new XMLHttpRequest();
+xhr.open('GET', 'get_produk.php', true); // Menyesuaikan path ke "../produk.php"
+xhr.onload = function () {
+  if (xhr.status === 200) {
+    // Mengubah respons JSON menjadi objek JavaScript
+    let response = JSON.parse(xhr.responseText);
+    products.data = response.data;
+    // console.log(products.data); // Menampilkan data produk di konsol
+    // document.createElement("span").textContent = "prsdfads";
 
-for (let i of products.data) {
-  //div satu kotak
-  let card = document.createElement("div");
-  //Card should have category and should stay hidden initially
-  card.classList.add("card", i.category, "hide");
+    loaddata(products.data);
+  }
 
-  //div untuk image
-  let imgContainer = document.createElement("div");
-  imgContainer.classList.add("image-container");
+  window.onload = () => {
+    filterProduct("all");
+  };
+};
+xhr.send();
 
-  let image = document.createElement("img");
-  image.setAttribute("src", i.image);
-  imgContainer.appendChild(image);
+function loaddata(data) {
+  console.log(data)
+  for (let i of data) {
+    //div satu kotak
+    let card = document.createElement("div");
+    //Card should have kategori and should stay hidden initially
+    card.classList.add("card", i.kategori, "hide");
 
-  //nama dan price
-  let container = document.createElement("div");
-  container.classList.add("container");
+    //div untuk image
+    let imgContainer = document.createElement("div");
+    imgContainer.classList.add("image-container");
 
-  let name = document.createElement("h3");
-  name.classList.add("product-name");
-  name.innerText = i.nama.toUpperCase();
-  container.appendChild(name);
+    let image = document.createElement("img");
+    image.setAttribute("src", i.image);
+    imgContainer.appendChild(image);
 
-  let price = document.createElement("p");
-  price.innerText = "$" + i.price;
-  container.appendChild(price);
+    //nama dan price
+    let container = document.createElement("div");
+    container.classList.add("container");
 
-  //form add to cart
-  let form = document.createElement("div");
-  form.classList.add("tombol");
-  //tombol
-  let button = document.createElement("button");
-  button.classList.add("button-card");
-  button.setAttribute("name", "button");
-  button.innerText = "Add to Cart";
-  button.addEventListener("click", () => {
-    addToCart(i)
-  });
-  form.appendChild(button);
-  container.appendChild(form)
+    let name = document.createElement("h3");
+    name.classList.add("product-name");
+    name.innerText = i.nama.toUpperCase();
+    container.appendChild(name);
 
-  card.appendChild(imgContainer);
-  card.appendChild(container);
-  document.getElementById("products").appendChild(card);
+    let price = document.createElement("p");
+    price.innerText = "$" + i.price;
+    container.appendChild(price);
+
+    //form add to cart
+    let form = document.createElement("div");
+    form.classList.add("tombol");
+    //tombol
+    let button = document.createElement("button");
+    button.classList.add("button-card");
+    button.setAttribute("name", "button");
+    button.innerText = "Add to Cart";
+    button.addEventListener("click", () => {
+      addToCart(i)
+    });
+    form.appendChild(button);
+    container.appendChild(form)
+
+    card.appendChild(imgContainer);
+    card.appendChild(container);
+    document.getElementById("products").appendChild(card);
+  }
 }
+
 
 function addToCart(item) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   cart.push(item);
   localStorage.setItem("cart", JSON.stringify(cart));
+
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', 'add_to_cart.php', true);
+  xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      // Respon dari server (jika diperlukan)
+      // console.log(xhr.responseText);
+      window.alert(xhr.responseText);
+    }
+  };
+  xhr.send('item=' + JSON.stringify(item));
 }
 
 
@@ -134,8 +111,6 @@ function filterProduct(value) {
       document.getElementById(button.innerText).style.border = "none";
     }
   });
-
-
   let elements = document.querySelectorAll(".card");
 
   elements.forEach((element) => {
@@ -169,6 +144,73 @@ document.getElementById("search").addEventListener("click", () => {
 });
 
 
-window.onload = () => {
-  filterProduct("all");
-};
+
+
+// products = {
+//   data: [
+//     {
+//       nama: "Mouse G",
+//       kategori: "Mouse",
+//       price: "30",
+//       image: "assets/produk1.webp",
+//       deskripsi: "Tambahan terbaru pada jajaran produk G yang legendaris. Dilengkapi switch optik-mechanical hibrida LIGHTFORCE kami yang pertama dan protokol LIGHTSPEED",
+//     },
+//     {
+//       nama: "Keyboard G",
+//       kategori: "Keyboard",
+//       price: "49",
+//       image: "assets/produk2.png",
+//       deskripsi: "Tactile mechanical switch standar gaming memberikan feedback yang jelas melalui momen aktuasi",
+//     },
+//     {
+//       nama: "Headset G",
+//       kategori: "Headset",
+//       price: "99",
+//       image: "assets/produk3.png",
+//       deskripsi: "Mulai dari desain hingga produksi, sampai pengiriman, kami sebisa mungkin menggunakan plastik daur ulang, menciptakan kemasan yang ramah lingkungan,",
+//     },
+//     {
+//       nama: "Mouse M",
+//       kategori: "Mouse",
+//       price: "29",
+//       image: "assets/produk4.png",
+//       deskripsi: "Kurang dari 63 gram. Low-latency LIGHTSPEED wireless terbaik. Presisi tingkat tinggi dengan sensor HERO 25K.",
+//     },
+//     {
+//       nama: "Keyboard M",
+//       kategori: "Keyboard",
+//       price: "129",
+//       image: "assets/produk5.png",
+//       deskripsi: "Dilengkapi dengan pencahayaan RGB memukau dan switch mechanical GX pilihanmu. Hadir dalam corak White Mist. Aksesori bercorak warna dijual terpisah.",
+//     },
+//     {
+//       nama: "Headset M",
+//       kategori: "Headset",
+//       price: "89",
+//       image: "assets/produk6.webp",
+//       deskripsi: "memaksimalkan kenyamanan dan kecocokan untuk semua gamer termasuk gamer dengan ukuran kepala lebih kecil.",
+//     },
+//     {
+//       nama: "Mousepad X",
+//       kategori: "Mousepad",
+//       price: "189",
+//       image: "assets/produk7.webp",
+//       deskripsi: "Mouse G adalah tambahan",
+//     },
+//     {
+//       nama: "Mouse X",
+//       kategori: "Mouse",
+//       price: "49",
+//       image: "assets/produk8.webp",
+//       deskripsi: " Dengan teknologi LIGHTSYNC, sensor kelas gaming, dan desain 6 tombol klasik, kamu akan menceriakan game-mu dan mejamu",
+//     },
+//   ],
+// };
+
+// console.log(products.data);
+
+
+
+
+
+

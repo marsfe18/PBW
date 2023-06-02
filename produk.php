@@ -74,34 +74,7 @@ session_start();
 
     <?php include 'footer.php'; ?>
     <script src="js/produk.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var addButton = document.getElementsByName('button');
-            var popupOverlay = document.createElement('div');
-            popupOverlay.className = 'popup-overlay';
-            var popup = document.createElement('div');
-            popup.className = 'popup';
-            popup.innerHTML = '<p>Please login first.</p><button id="closeButton">Close</button>';
 
-            addButton.forEach((button) => {
-                button.addEventListener('click', function() {
-                    var sessionUser = "<?php echo isset($_SESSION['username']) ? $_SESSION['username'] : ''; ?>";
-                    if (sessionUser === '') {
-                        document.body.appendChild(popupOverlay);
-                        document.body.appendChild(popup);
-                        document.getElementById('closeButton').addEventListener('click', function() {
-                            document.body.removeChild(popupOverlay);
-                            document.body.removeChild(popup);
-                        });
-                    } else {
-                        // Jika session user sudah ter-set, lakukan aksi untuk menambahkan item
-                        // ...
-                    }
-                });
-            });
-
-
-        });
     </script>
 
 </body>

@@ -47,6 +47,7 @@ session_start();
 
                 <label for="jenisPembayaran">Jenis Pembayaran</label>
                 <select id="jenisPembayaran" name="jenisPembayaran" onchange="showAlamatPembayaran(this.value)">
+                    <option value="">-</option>
                     <option value="usdc">USDC-Polygon</option>
                     <option value="nomor">Gopay, Shopee, OVO, Linkaja</option>
                     <option value="paypal">Paypal</option>

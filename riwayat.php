@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,8 +54,8 @@
                     </tr>
                 </thead>
                 <tbody></tbody>
-                <tfoot></tfoot>
             </table>
+            <div id="total"></div>
         </div>
     </div>
 

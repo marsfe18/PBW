@@ -15,10 +15,6 @@ xhr.onload = function () {
 
     loaddata(products.data);
   }
-
-  window.onload = () => {
-    filterProduct("all");
-  };
 };
 xhr.send();
 
@@ -143,6 +139,9 @@ document.getElementById("search").addEventListener("click", () => {
   });
 });
 
+window.onload = () => {
+  filterProduct("all");
+};
 
 
 

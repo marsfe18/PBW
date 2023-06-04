@@ -17,7 +17,6 @@ function sendRequest(url, method, data, callback) {
 function displayOrders(orders) {
     let orderTable = document.getElementById('orderTable');
     let tbody = orderTable.getElementsByTagName('tbody')[0];
-    let img = document.getElementsByClassName('bukti')[0];
 
     tbody.innerHTML = '';
 
@@ -27,7 +26,7 @@ function displayOrders(orders) {
         row.setAttribute('data-order-id', order.id);
         row.addEventListener('click', function () {
             let orderId = this.getAttribute('data-order-id');
-            getOrderItems(orderId);
+            getOrderItems(orderId, order);
         });
 
         let orderIdCell = document.createElement('td');
@@ -56,24 +55,23 @@ function displayOrders(orders) {
 }
 
 // Fungsi untuk mendapatkan order items berdasarkan order ID
-function getOrderItems(orderId) {
+function getOrderItems(orderId, order) {
     let url = 'get_order_items.php';
     let data = 'order_id=' + encodeURIComponent(orderId);
 
     sendRequest(url, 'POST', data, function (response) {
         let orderItems = JSON.parse(response);
-        displayOrderItems(orderItems);
+        displayOrderItems(orderItems, order.image);
         openOrderItemPopup();
     });
 }
 
 // Fungsi untuk menampilkan order items dalam pop-up
-function displayOrderItems(orderItems) {
+function displayOrderItems(orderItems, orderImage) {
     let orderItemTable = document.getElementById('orderItemTable');
     let tbody = orderItemTable.getElementsByTagName('tbody')[0];
     tbody.innerHTML = '';
-
-    // console.log(orderItems);
+    let total = 0;
 
     for (let i = 0; i < orderItems.length; i++) {
         let orderItem = orderItems[i];
@@ -96,7 +94,13 @@ function displayOrderItems(orderItems) {
         row.appendChild(kategoriCell);
 
         tbody.appendChild(row);
+        total += parseInt(orderItem.price);
     }
+    let eltotal = document.getElementById('total');
+    eltotal.textContent = '';
+    let totalharga = document.createElement('h3');
+    totalharga.textContent = 'Total Harga : $' + total;
+    eltotal.appendChild(totalharga);
 
 }
 

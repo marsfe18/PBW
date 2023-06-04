@@ -40,6 +40,11 @@ session_start();
         .search-input::placeholder {
             color: #999;
         }
+
+        .container {
+            max-height: 400px;
+            overflow: auto;
+        }
     </style>
 </head>
 
@@ -55,6 +60,9 @@ session_start();
         <div id="review-list">
             <!-- Review list will be displayed here dynamically -->
         </div>
+
+    </div>
+    <div>
         <?php
         if (isset($_SESSION['username'])) {
             echo '<button id="add-review-btn" onclick="showReviewForm()">Add Review</button>';
